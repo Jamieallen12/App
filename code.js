@@ -2,6 +2,7 @@ console.log("hello")
 
 //global variables
 var answer = 0
+var mode = "hard"
 
 function newQuestion(){
     //grab the H2 from the web page
@@ -11,6 +12,19 @@ function newQuestion(){
     var n1 = Math.floor(Math.random() * 12 + 1)
     var n2 = Math.floor(Math.random() * 12 + 1)
 
+    if (mode == "easy") {
+        console.log("making easy questions")
+        n2 = Math.floor(Math.random() * 6 + 1)
+    }else{
+        console.log("making hard questions")
+        n2 = Math.floor(Math.random() * 6 + 7)
+    }
+
+
+
+
+
+
     answer = n1 * n2
     console.log(answer)
     
@@ -19,7 +33,9 @@ function newQuestion(){
 }
 
 
-window.onload = function (){
+window.onload = function (){  
+    mode = localStorage.getItem("mode");
+    console.log(mode)
     newQuestion();
 }
     function checkAnswer(){
@@ -28,8 +44,10 @@ window.onload = function (){
     console.log(answer)
     if (a == answer){
             console.log("Correct")
+            document.getElementById("message").innerHTML = "Correct"
     }else{
             console.log("Incorrect")
+            document.getElementById("message").innerHTML = "Incorrect"
     }
     document.getElementById("answer").value = ""
     newQuestion();
